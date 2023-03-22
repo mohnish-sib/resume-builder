@@ -14,57 +14,66 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### GitHub live
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Refer: https://www.youtube.com/watch?v=mdO18zv3oGQ
+Doc: https://create-react-app.dev/docs/deployment/#github-pages
 
-### `npm run build`
+Step 1: Add homepage to package.json
+The step below is important!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If you skip it, your app will not deploy correctly.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open your package.json and add a homepage field for your project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+"homepage": "https://myusername.github.io/my-app",
+or for a GitHub user page:
 
-### `npm run eject`
+"homepage": "https://myusername.github.io",
+or for a custom domain page:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+"homepage": "https://mywebsite.com",
+Create React App uses the homepage field to determine the root URL in the built HTML file.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Step 2: Install gh-pages and add deploy to scripts in package.json
+Now, whenever you run npm run build, you will see a cheat sheet with instructions on how to deploy to GitHub Pages.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To publish it at https://myusername.github.io/my-app, run:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+npm install --save gh-pages
+Alternatively you may use yarn:
 
-## Learn More
+yarn add gh-pages
+Add the following scripts in your package.json:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`"scripts": {
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- "predeploy": "npm run build",
+- "deploy": "gh-pages -d build",
+  "start": "react-scripts start",
+  "build": "react-scripts build",`
+  The predeploy script will run automatically before deploy is run.
 
-### Code Splitting
+If you are deploying to a GitHub user page instead of a project page you'll need to make one additional modification:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Tweak your package.json scripts to push deployments to master:
+` "scripts": {
+"predeploy": "npm run build",
 
-### Analyzing the Bundle Size
+- "deploy": "gh-pages -d build",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* "deploy": "gh-pages -b master -d build",`
+  Step 3: Deploy the site by running npm run deploy
+  Then run:
 
-### Making a Progressive Web App
+`npm run deploy`
+Step 4: For a project page, ensure your project’s settings use gh-pages
+Finally, make sure GitHub Pages option in your GitHub project settings is set to use the gh-pages branch:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+gh-pages branch setting
+Step 5: Optionally, configure the domain
+You can configure a custom domain with GitHub Pages by adding a CNAME file to the public/ folder.
 
-### Advanced Configuration
+Your CNAME file should look like this:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+mywebsite.com
