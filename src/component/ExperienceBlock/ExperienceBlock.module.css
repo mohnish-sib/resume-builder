@@ -1,0 +1,12 @@
+.experienceContainer {
+  display: flex;
+  flex-direction: column;
+}
+.subheading {
+  font-weight: bold;
+  text-align: justify;
+}
+.content {
+  text-align: justify;
+  margin-bottom: 0.5rem;
+}
