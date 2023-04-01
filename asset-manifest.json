@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/resume-builder/static/css/main.01611aed.css",
+    "main.js": "/resume-builder/static/js/main.603f50b7.js",
+    "EmojiPicker.css": "/resume-builder/static/css/EmojiPicker.92c922bd.chunk.css",
+    "static/js/787.61b62c3a.chunk.js": "/resume-builder/static/js/787.61b62c3a.chunk.js",
+    "static/js/111.767b164e.chunk.js": "/resume-builder/static/js/111.767b164e.chunk.js",
+    "index.html": "/resume-builder/index.html",
+    "main.01611aed.css.map": "/resume-builder/static/css/main.01611aed.css.map",
+    "main.603f50b7.js.map": "/resume-builder/static/js/main.603f50b7.js.map",
+    "EmojiPicker.92c922bd.chunk.css.map": "/resume-builder/static/css/EmojiPicker.92c922bd.chunk.css.map",
+    "787.61b62c3a.chunk.js.map": "/resume-builder/static/js/787.61b62c3a.chunk.js.map",
+    "111.767b164e.chunk.js.map": "/resume-builder/static/js/111.767b164e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01611aed.css",
+    "static/js/main.603f50b7.js"
+  ]
+}
