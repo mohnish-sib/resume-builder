@@ -5,32 +5,3 @@
   padding: 1.5rem 1rem;
   margin-top: 1rem;
 }
-
-.introRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.introBlock {
-  display: flex;
-  flex-direction: column;
-}
-
-.educationContainer {
-  display: flex;
-  flex-direction: column;
-}
-table {
-  border: 2px solid black;
-  /* height: 200px; */
-  width: 40vw;
-}
-
-th {
-  border-bottom: 1px solid black;
-  text-align: justify;
-}
-
-td {
-  text-align: justify;
-}
