@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ExperienceBlock from "../ExperienceBlock";
 import styles from "./Main.module.css";
 
@@ -18,6 +19,14 @@ export default function Main() {
     },
   ];
 
+  const dispatch = useDispatch();
+
+  const incOnClick = () => {
+    dispatch({ type: "inc" });
+  };
+
+  const counter = useSelector((state) => state.counter);
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.introRow}>
@@ -31,6 +40,7 @@ export default function Main() {
           <div> Indian Institute of</div>
           <div> Technology</div>
           <div> Roorkee</div>
+          <div onClick={incOnClick}>{counter}</div>
         </div>
       </div>
       <div className={styles.educationContainer}>
