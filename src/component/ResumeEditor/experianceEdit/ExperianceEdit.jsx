@@ -1,17 +1,20 @@
 import { Button, Inputbox, Sidemodal } from "@dtsl/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEducation } from "../../../store/actions/education";
-import styles from "./EducationEdit.module.css";
+import styles from "../educationEdit/EducationEdit.module.css";
+const INITIAL_HEIGHT = "4.1875rem";
 
-export default function EducationEdit() {
+export default function ExperianceEdit() {
   const { educations = [] } = useSelector((state) => state.Education);
 
   const dispatch = useDispatch();
+  const textAreaRef = useRef();
+
   const [show, setShow] = useState(false);
-  const [schoolName, setSchoolName] = useState("");
-  const [degree, setDegree] = useState("");
-  const [grade, setGrade] = useState("");
+  const [heading, setHeading] = useState("");
+  const [subheading, setsubheading] = useState("");
+  const [points, setPoints] = useState("");
 
   const handleOnSubmit = (e) => {
     dispatch(
@@ -19,16 +22,16 @@ export default function EducationEdit() {
         ...educations,
         {
           id: educations.length + 1,
-          name: schoolName,
-          degree: degree,
-          grade: grade,
+          heading: heading,
+          subheading: subheading,
+          points: points,
         },
       ])
     );
     setShow(false);
-    setSchoolName("");
-    setDegree("");
-    setGrade("");
+    setHeading("");
+    setsubheading("");
+    setPoints("");
     console.log("primary fired");
   };
 
@@ -41,41 +44,54 @@ export default function EducationEdit() {
     return (
       <>
         <Inputbox
-          labelText="School"
+          labelText="Heading"
           placeholder="Enter"
           className={styles.inputEducation}
-          value={schoolName}
-          onChange={(e) => setSchoolName(e.target.value)}
+          value={heading}
+          onChange={(e) => setHeading(e.target.value)}
         />
         <Inputbox
-          labelText="Degree"
+          labelText="Subheading"
           placeholder="Enter"
           className={styles.inputEducation}
-          value={degree}
-          onChange={(e) => setDegree(e.target.value)}
+          value={subheading}
+          onChange={(e) => setsubheading(e.target.value)}
         />
         <Inputbox
-          labelText="Grade"
+          ref={textAreaRef}
+          labelText="Content"
+          multiline
           placeholder="Enter"
           className={styles.inputEducation}
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
+          value={points}
+          onChange={(e) => {
+            const text = e.target.value;
+            const textArea = textAreaRef.current;
+            textArea.style.height = INITIAL_HEIGHT;
+            let height = (+textArea.scrollHeight + 2) / 16;
+            textArea.style.height = height + "rem";
+            setPoints(text);
+          }}
         />
       </>
     );
   };
 
+  useEffect(() => {
+    if (textAreaRef.current) textAreaRef.current.style.height = INITIAL_HEIGHT;
+  }, []);
+
   return (
     <>
       <Button
-        label="Add Education"
+        label="Add Experiance"
         onClick={() => {
           setShow(!show);
         }}
       />
       <Sidemodal
         show={show}
-        title="Education"
+        title="Experiance"
         headerVariant="ongoing"
         onHide={() => {
           setShow(false);

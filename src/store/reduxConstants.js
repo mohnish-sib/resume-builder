@@ -4,6 +4,7 @@ export const ReduxContants = {
   PHONE_NO: "PHONE_NO",
   EMAIL: "EMAIL",
   EDUCATION: "EDUCATION",
+  EXPERIANCE: "EXPERIANCE",
 };
 
 export default ReduxContants;

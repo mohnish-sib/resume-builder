@@ -6,17 +6,20 @@ export default function ExperienceBlock(props) {
 
   return (
     <div className={styles.experienceContainer}>
-      <h3>{heading} </h3>
+      <h2>{heading} </h2>
       <div>
         {content.map((item) => {
           return (
             <>
-              <div className={styles.subheading}>{item?.heading} </div>
+              <h3 className={styles.subheading}>{item?.heading} </h3>
+              <p className={styles.subheading}>
+                <em>{item?.subheading}</em>
+              </p>
               <div
                 className={styles.content}
-                style={{ whiteSpace: "pre-line" }}
+                style={{ wordWrap: "break-word", whiteSpace: "pre-line" }}
               >
-                {item?.content}
+                {item?.points}
               </div>
             </>
           );

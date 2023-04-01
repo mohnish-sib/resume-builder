@@ -1,32 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ExperienceBlock from "../ExperienceBlock";
 import Intro from "../Intro";
 import ResumeEditor from "../ResumeEditor";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const data = [
-    {
-      key: 1,
-      heading: "abc",
-      content: `ahjsmdnasdhjdans
-       gavshjhmadjsn
-       asdhgjnhbmds`,
-    },
-    {
-      key: 2,
-      heading: "abc",
-      content: "ahjsmdnasdhjdans",
-    },
-  ];
+  const { educations = [] } = useSelector((state) => state.Education);
 
+  console.log("###", educations);
   return (
     <div className={styles.mainContainer}>
       <ResumeEditor />
       <div style={{ width: "50vw" }}>
         <div className={styles.resumeContainer}>
           <Intro />
-          <ExperienceBlock heading="Experiance" content={data} />
+          <ExperienceBlock heading="Experiance" content={educations} />
         </div>
       </div>
     </div>
