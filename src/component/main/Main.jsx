@@ -1,6 +1,7 @@
 import React from "react";
 import ExperienceBlock from "../ExperienceBlock";
 import Intro from "../Intro";
+import ResumeEditor from "../ResumeEditor";
 import styles from "./Main.module.css";
 
 export default function Main() {
@@ -21,8 +22,13 @@ export default function Main() {
 
   return (
     <div className={styles.mainContainer}>
-      <Intro />
-      <ExperienceBlock heading="Experiance" content={data} />
+      <ResumeEditor />
+      <div style={{ width: "50vw" }}>
+        <div className={styles.resumeContainer}>
+          <Intro />
+          <ExperienceBlock heading="Experiance" content={data} />
+        </div>
+      </div>
     </div>
   );
 }

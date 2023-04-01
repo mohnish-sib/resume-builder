@@ -1,0 +1,13 @@
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 48vw;
+}
+.introBlock {
+  column-gap: 4.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2.5rem 0rem;
+  /* margin: auto; */
+}

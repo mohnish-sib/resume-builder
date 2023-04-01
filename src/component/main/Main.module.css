@@ -1,7 +1,10 @@
 .mainContainer {
+  display: flex;
+}
+.resumeContainer {
   border: 2px solid black;
-  width: 40vw;
-  height: 90vh;
+  width: 85%;
+  /* height: 90vh; */
   padding: 1.5rem 1rem;
   margin-top: 1rem;
 }

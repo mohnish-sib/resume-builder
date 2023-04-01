@@ -1,7 +1,7 @@
 import constants from "../reduxConstants";
 
 const initialState = {
-  education: [],
+  educations: [],
 };
 
 function Education(state = initialState, action) {
@@ -9,7 +9,7 @@ function Education(state = initialState, action) {
     case constants.EDUCATION: {
       return {
         ...state,
-        education: action.education,
+        educations: action.educations,
       };
     }
 
