@@ -23,7 +23,11 @@ export default function Main() {
             x={10}
             y={0}
           >
-            {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+            {({ toPdf }) => (
+              <button onClick={toPdf} className="btn btn-success">
+                Generate Pdf
+              </button>
+            )}
           </Pdf>
           <Intro />
           <ExperienceBlock heading="Experiance" content={educations} />

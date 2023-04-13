@@ -1,8 +1,10 @@
-import { Button, Inputbox, Sidemodal } from "@dtsl/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEducation } from "../../../store/actions/education";
 import styles from "./EducationEdit.module.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 export default function EducationEdit() {
   const { educations = [] } = useSelector((state) => state.Education);
@@ -40,64 +42,64 @@ export default function EducationEdit() {
   const content = () => {
     return (
       <>
-        <Inputbox
-          labelText="School"
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={schoolName}
-          onChange={(e) => setSchoolName(e.target.value)}
-        />
-        <Inputbox
-          labelText="Degree"
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={degree}
-          onChange={(e) => setDegree(e.target.value)}
-        />
-        <Inputbox
-          labelText="Grade"
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-        />
+        <Form className={styles.introBlock}>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>School</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter"
+              className={styles.inputEducation}
+              value={schoolName}
+              onChange={(e) => setSchoolName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="position">
+            <Form.Label>Degree</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter"
+              className={styles.inputEducation}
+              value={degree}
+              onChange={(e) => setDegree(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="phone">
+            <Form.Label>Grade</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter"
+              className={styles.inputEducation}
+              value={grade}
+              onChange={(e) => setGrade(e.target.value)}
+            />
+          </Form.Group>
+        </Form>
       </>
     );
   };
 
+  const handleShowModal = () => setShow(true);
+
   return (
     <>
-      <Button
-        label="Add Education"
-        onClick={() => {
-          setShow(!show);
-        }}
-      />
-      <Sidemodal
-        show={show}
-        title="Education"
-        headerVariant="ongoing"
-        onHide={() => {
-          setShow(false);
-        }}
-        content={content}
-        // showSideModal, hideSideModal (Use these functions if you want to explicitly handle opening and closing of sidemodal)
-        primaryAction={{
-          label: "Submit",
-          variant: "primary",
-          onClick: handleOnSubmit,
-          disabled: false,
-          // {...Rest of button component props}
-        }}
-        secondaryAction={{
-          label: "Back",
-          variant: "tertiary",
-          onClick: handleSecondaryChange,
-          //   icon: <ArrowLeft />,
-          disabled: false,
-          // {...Rest of button component props}
-        }}
-      />
+      <Button variant="primary" onClick={handleShowModal}>
+        Add Education
+      </Button>
+
+      <Modal show={show} onHide={handleSecondaryChange}>
+        <Modal.Header closeButton>
+          <Modal.Title>Education</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{content()}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleSecondaryChange}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleOnSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

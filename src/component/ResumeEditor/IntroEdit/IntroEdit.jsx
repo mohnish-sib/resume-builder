@@ -1,4 +1,3 @@
-import { Inputbox } from "@dtsl/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,6 +7,7 @@ import {
   setPhoneNo,
 } from "../../../store/actions/intro";
 import styles from "../ResumeEditor.module.css";
+import Form from "react-bootstrap/Form";
 
 export default function IntroEdit() {
   const introData = useSelector((state) => state.Intro);
@@ -30,31 +30,45 @@ export default function IntroEdit() {
   };
 
   return (
-    <div className={styles.introBlock}>
-      <Inputbox
-        labelText="Your name"
-        placeholder="Your name"
-        value={introData.name}
-        onChange={onNameChange}
-      />
-      <Inputbox
-        labelText="Current Position"
-        placeholder="Current Position"
-        value={introData.current_position}
-        onChange={onChangePosition}
-      />
-      <Inputbox
-        labelText="Phone"
-        placeholder="Phone"
-        value={introData.phone}
-        onChange={onChangePhone}
-      />
-      <Inputbox
-        labelText="Email"
-        placeholder="Email"
-        value={introData.email}
-        onChange={onChangeEmail}
-      />
-    </div>
+    <>
+      <Form className={styles.introBlock}>
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Your name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Your name"
+            value={introData.name}
+            onChange={onNameChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="position">
+          <Form.Label>Current Position</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Current Position"
+            value={introData.current_position}
+            onChange={onChangePosition}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="phone">
+          <Form.Label>Phone</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Phone"
+            value={introData.phone}
+            onChange={onChangePhone}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={introData.email}
+            onChange={onChangeEmail}
+          />
+        </Form.Group>
+      </Form>
+    </>
   );
 }

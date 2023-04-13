@@ -1,9 +1,11 @@
-import { Button, Inputbox, Sidemodal } from "@dtsl/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEducation } from "../../../store/actions/education";
 import styles from "../educationEdit/EducationEdit.module.css";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 const INITIAL_HEIGHT = "4.1875rem";
+import Form from "react-bootstrap/Form";
 
 export default function ExperianceEdit() {
   const { educations = [] } = useSelector((state) => state.Education);
@@ -43,36 +45,57 @@ export default function ExperianceEdit() {
   const content = () => {
     return (
       <>
-        <Inputbox
-          labelText="Heading"
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={heading}
-          onChange={(e) => setHeading(e.target.value)}
-        />
-        <Inputbox
-          labelText="Subheading"
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={subheading}
-          onChange={(e) => setsubheading(e.target.value)}
-        />
-        <Inputbox
-          ref={textAreaRef}
-          labelText="Content"
-          multiline
-          placeholder="Enter"
-          className={styles.inputEducation}
-          value={points}
-          onChange={(e) => {
-            const text = e.target.value;
-            const textArea = textAreaRef.current;
-            textArea.style.height = INITIAL_HEIGHT;
-            let height = (+textArea.scrollHeight + 2) / 16;
-            textArea.style.height = height + "rem";
-            setPoints(text);
-          }}
-        />
+        <Form className={styles.introBlock}>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Heading</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter"
+              className={styles.inputEducation}
+              value={heading}
+              onChange={(e) => setHeading(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="position">
+            <Form.Label>Subheading</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter"
+              className={styles.inputEducation}
+              value={subheading}
+              onChange={(e) => setsubheading(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="phone">
+            <Form.Label>Content</Form.Label>
+            <Form.Control
+              as="textarea"
+              ref={textAreaRef}
+              placeholder="Enter"
+              className={styles.inputEducation}
+              style={{ height: "100px" }}
+              value={points}
+              onChange={(e) => {
+                const text = e.target.value;
+                const textArea = textAreaRef.current;
+                textArea.style.height = INITIAL_HEIGHT;
+                let height = (+textArea.scrollHeight + 2) / 16;
+                textArea.style.height = height + "rem";
+                setPoints(text);
+              }}
+            />
+          </Form.Group>
+        </Form>
+        <Button
+          variant="secondary"
+          onClick={handleSecondaryChange}
+          style={{ marginRight: "1rem" }}
+        >
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleOnSubmit}>
+          Save Changes
+        </Button>
       </>
     );
   };
@@ -81,39 +104,30 @@ export default function ExperianceEdit() {
     if (textAreaRef.current) textAreaRef.current.style.height = INITIAL_HEIGHT;
   }, []);
 
+  const handleClose = () => setShow(false);
+
   return (
     <>
       <Button
-        label="Add Experiance"
+        variant="primary"
         onClick={() => {
           setShow(!show);
         }}
-      />
-      <Sidemodal
+      >
+        {" "}
+        Add Experiance
+      </Button>
+      <Offcanvas
         show={show}
-        title="Experiance"
-        headerVariant="ongoing"
-        onHide={() => {
-          setShow(false);
-        }}
-        content={content}
-        // showSideModal, hideSideModal (Use these functions if you want to explicitly handle opening and closing of sidemodal)
-        primaryAction={{
-          label: "Submit",
-          variant: "primary",
-          onClick: handleOnSubmit,
-          disabled: false,
-          // {...Rest of button component props}
-        }}
-        secondaryAction={{
-          label: "Back",
-          variant: "tertiary",
-          onClick: handleSecondaryChange,
-          //   icon: <ArrowLeft />,
-          disabled: false,
-          // {...Rest of button component props}
-        }}
-      />
+        onHide={handleClose}
+        placement="end"
+        name="experiancend"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Experiance</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>{content()}</Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 }
